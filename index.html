@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Tareas Universidad</title>
+</head>
+<body>
+    <h1>Mi Lista de Tareas</h1>
+
+    <!-- Formulario para escribir -->
+    <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
+    <button onclick="agregarTarea()">Guardar Tarea</button>
+
+    <!-- Lista donde se mostrarán -->
+    <ul id="listaTareas"></ul>
+
+    <script>
+        function agregarTarea() {
+            let texto = document.getElementById("nuevaTarea").value;
+            if (texto === "") return;
+
+            let li = document.createElement("li");
+            li.textContent = texto;
+            document.getElementById("listaTareas").appendChild(li);
+
+            document.getElementById("nuevaTarea").value = ""; // Limpiar cuadro
+        }
+    </script>
+</body>
+</html>
