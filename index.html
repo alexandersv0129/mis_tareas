@@ -24,8 +24,8 @@
         button { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
         button:hover { background-color: #218838; }
         ul { list-style: none; padding: 0; }
-        li { background: #eee; margin-top: 8px; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; }
-        .btn-borrar { background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        li { background: #eee; margin-top: 8px; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-borrar { background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -40,8 +40,12 @@
     </div>
 
     <script>
-        // Al cargar la página, recuperamos las tareas guardadas
-        document.addEventListener("DOMContentLoaded", cargarTareas);
+        // Carga las tareas apenas abre la página
+        document.addEventListener("DOMContentLoaded", renderizarTareas);
+
+        function obtenerTareas() {
+            return JSON.parse(localStorage.getItem("tareas")) || [];
+        }
 
         function agregarTarea() {
             let input = document.getElementById("nuevaTarea");
@@ -54,10 +58,6 @@
 
             input.value = "";
             renderizarTareas();
-        }
-
-        function obtenerTareas() {
-            return JSON.parse(localStorage.getItem("tareas")) || [];
         }
 
         function eliminarTarea(index) {
@@ -75,7 +75,7 @@
             tareas.forEach((tarea, index) => {
                 let li = document.createElement("li");
                 li.innerHTML = `
-                    ${tarea} 
+                    <span>${tarea}</span>
                     <button class="btn-borrar" onclick="eliminarTarea(${index})">X</button>
                 `;
                 lista.appendChild(li);
