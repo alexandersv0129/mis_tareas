@@ -40,11 +40,12 @@
     </div>
 
     <script>
-        // Carga las tareas apenas abre la página
-        document.addEventListener("DOMContentLoaded", renderizarTareas);
+        // Cargar las tareas guardadas INMEDIATAMENTE
+        renderizarTareas();
 
         function obtenerTareas() {
-            return JSON.parse(localStorage.getItem("tareas")) || [];
+            let guardadas = localStorage.getItem("tareas");
+            return guardadas ? JSON.parse(guardadas) : [];
         }
 
         function agregarTarea() {
